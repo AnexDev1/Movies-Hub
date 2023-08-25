@@ -71,7 +71,7 @@ export default function App() {
     <>
       <NavBar>
         <Search />
-        <NumResults movies={10} />
+        <NumResults movies={movies} />
       </NavBar>
       <Main>
         <Box>{isLoading ? <Loader /> : <MoviesList movies={movies} />}</Box>
