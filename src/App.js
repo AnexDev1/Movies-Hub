@@ -50,20 +50,29 @@ import { useEffect, useState } from "react";
 const average = (arr) =>
   arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
 const KEY = "1f896906";
-const query = "transformers";
+const query = "the karate kid";
 export default function App() {
   const [movies, setMovies] = useState([]);
   const [watched, setWatched] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
   useEffect(function () {
     async function fetchMovies() {
-      setIsLoading(true);
-      const res = await fetch(
-        `http://www.omdbapi.com/?apikey=${KEY}&s=${query}`
-      );
-      const data = await res.json();
-      setMovies(data.Search);
-      setIsLoading(false);
+      try {
+        setIsLoading(true);
+        const res = await fetch(
+          `http://www.omdbapi.com/?apikey=${KEY}&s=${query}`
+        );
+        if (!res.ok) throw new Error("Something went wrong!");
+        const data = await res.json();
+        if (data.Response === "False") throw new Error("Movie not Found");
+        setMovies(data.Search);
+      } catch (err) {
+        console.error(err);
+        setError(err.message);
+      } finally {
+        setIsLoading(false);
+      }
     }
     fetchMovies();
   }, []);
@@ -74,7 +83,11 @@ export default function App() {
         <NumResults movies={movies} />
       </NavBar>
       <Main>
-        <Box>{isLoading ? <Loader /> : <MoviesList movies={movies} />}</Box>
+        <Box>
+          {isLoading && <Loader />}
+          {!isLoading && !error && <MoviesList movies={movies} />}
+          {error && <ErrorMessage message={error} />}
+        </Box>
         <Box>
           <WatchedMoviesSummary watched={watched} />
           <WatchedMoviesList watched={watched} />
@@ -85,6 +98,13 @@ export default function App() {
 }
 function Loader() {
   return <p className="loader">Loading...</p>;
+}
+function ErrorMessage({ message }) {
+  return (
+    <div className="error">
+      <span>⛔</span> {message}
+    </div>
+  );
 }
 //Structural Component
 function NavBar({ children }) {
