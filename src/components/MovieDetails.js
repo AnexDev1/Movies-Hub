@@ -80,7 +80,6 @@ export default function MovieDetails({
           </header>
           <section>
             <div className="rating">
-              {console.log(watched[0])}
               {!isWatched ? (
                 <>
                   <StarRating
