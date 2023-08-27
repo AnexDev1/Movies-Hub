@@ -26,6 +26,9 @@ export default function App() {
   function handleCloseDetail() {
     setSelectedId(null);
   }
+  function handleAddWatchedMovie(movie) {
+    setWatched((watched) => [...watched, movie]);
+  }
   useEffect(
     function () {
       async function fetchMovies() {
@@ -74,6 +77,8 @@ export default function App() {
             <MovieDetails
               selectedId={selectedId}
               onCloseMovie={handleCloseDetail}
+              onAddWatchedMovie={handleAddWatchedMovie}
+              watched={watched}
             />
           ) : (
             <>
@@ -86,10 +91,6 @@ export default function App() {
     </>
   );
 }
-
-//Structural Component
-
-//Stateful Components
 
 function Main({ children }) {
   return <main className="main">{children}</main>;
