@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Loader from "./Loader";
 import StarRating from "./StarRatings";
+import ErrorMessage from "./ErrorMessage";
 const KEY = "1f896906";
 
 export default function MovieDetails({
@@ -12,6 +13,7 @@ export default function MovieDetails({
   const [movie, setMovie] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [userRating, setUserRating] = useState("");
+  const [error, setError] = useState("");
   const {
     Actors: actors,
     Director: director,
@@ -41,16 +43,43 @@ export default function MovieDetails({
     onAddWatchedMovie(newMovie);
     onCloseMovie();
   }
+
+  useEffect(
+    function () {
+      function callback(e) {
+        if (e.code === "Escape") {
+          onCloseMovie();
+        }
+      }
+
+      document.addEventListener("keydown", callback);
+
+      return function () {
+        document.removeEventListener("keydown", callback);
+      };
+    },
+    [onCloseMovie]
+  );
+
   useEffect(
     function () {
       async function GetMovieDetails() {
-        setIsLoading(true);
-        const res = await fetch(
-          `http://www.omdbapi.com/?apikey=${KEY}&i=${selectedId}`
-        );
-        const data = await res.json();
-        setMovie(data);
-        setIsLoading(false);
+        try {
+          setIsLoading(true);
+          setError("");
+          const res = await fetch(
+            `http://www.omdbapi.com/?apikey=${KEY}&i=${selectedId}`
+          );
+          if (!res.ok) throw new Error("Something went wrong!");
+          const data = await res.json();
+          if (data.Response === "False") throw new Error("Detail not Found!");
+          setMovie(data);
+        } catch (err) {
+          console.error(err);
+          setError(err.message);
+        } finally {
+          setIsLoading(false);
+        }
       }
       GetMovieDetails();
     },
@@ -59,17 +88,19 @@ export default function MovieDetails({
     useEffect(
       function () {
         if (!title) return;
-
         document.title = `Movie| ${title}`;
+
+        return function () {
+          document.title = "MoviesHub";
+        };
       },
       [title]
     )
   );
   return (
     <div className="details">
-      {isLoading ? (
-        <Loader />
-      ) : (
+      {isLoading && <Loader />}
+      {!isLoading && !error && (
         <>
           <header>
             <button className="btn-back" onClick={onCloseMovie}>
@@ -114,6 +145,7 @@ export default function MovieDetails({
           </section>
         </>
       )}
+      {error && <ErrorMessage message={error} />}
     </div>
   );
 }
