@@ -1,4 +1,4 @@
-MoviesHub - A Movie Tracking Application
+**MoviesHub - A Movie Tracking Application**
 
 MoviesHub is a React-based movie tracking application that allows you to search for movies, view details, and keep track of movies you've watched.
 Table of Contents
