@@ -1,7 +1,7 @@
-**MoviesHub - A Movie Tracking Application**
+#MoviesHub - A Movie Tracking Application
 
 MoviesHub is a React-based movie tracking application that allows you to search for movies, view details, and keep track of movies you've watched.
-Table of Contents
+##Table of Contents
 
     Introduction
     Installation
@@ -9,7 +9,7 @@ Table of Contents
     Components
     License
 
-Introduction
+##Introduction
 
 MoviesHub is a user-friendly web application that lets you explore movies, view their details, and manage your watched movie list. It offers various components for searching movies, displaying search results, showing movie details, and managing watched movies.
 Installation
@@ -20,8 +20,8 @@ To get started with MoviesHub, follow these steps:
 
     bash
 
-git clone https://github.com/your-username/movieshub.git
-cd movieshub
+`git clone https://github.com/your-username/movieshub.git
+cd movieshub`
 
 Install the required packages:
 
