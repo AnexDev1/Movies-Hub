@@ -23,46 +23,15 @@ To get started with MoviesHub, follow these steps:
    ```bash
    git clone https://github.com/your-username/movieshub.git
    cd movieshub
+2. Install the required packages:
 
-Certainly! Here's the markdown version of the README with basic styling. You can copy and paste this markdown into your GitHub repository's README.md file:
+ ```bash
 
-markdown
+   npm install
 
-# MoviesHub - A Movie Tracking Application
+3. Run the development server:
 
-MoviesHub is a React-based movie tracking application that allows you to search for movies, view details, and keep track of movies you've watched.
-
-## Table of Contents
-
-- [Introduction](#introduction)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Components](#components)
-- [License](#license)
-
-## Introduction
-
-MoviesHub is a user-friendly web application that lets you explore movies, view their details, and manage your watched movie list. It offers various components for searching movies, displaying search results, showing movie details, and managing watched movies.
-
-## Installation
-
-To get started with MoviesHub, follow these steps:
-
-1. Clone the repository:
-
-   ```bash
-   git clone https://github.com/your-username/movieshub.git
-   cd movieshub
-
-    Install the required packages:
-
-    bash
-
-npm install
-
-Run the development server:
-
-bash
+```bash
 
     npm start
 
