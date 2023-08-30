@@ -50,17 +50,17 @@ Components
 
 MoviesHub includes the following components:
 
-    Box: A collapsible content box for displaying various content.
-    ErrorMessage: Component for displaying error messages.
-    NumResults: Displays the number of search results.
-    Loader: A loading indicator.
-    StarRating: A component for rating movies.
-    MovieDetails: Displays detailed information about a movie.
-    MoviesList: Lists search results with basic information.
-    NavBar: The navigation bar at the top of the app.
-    Search: Component for searching movies.
-    WatchedMoviesList: Lists movies you've watched.
-    WatchedMoviesSummary: Displays a summary of your watched movies.
+    `Box`: A collapsible content box for displaying various content.
+    `ErrorMessage`: Component for displaying error messages.
+    `NumResults`: Displays the number of search results.
+    `Loader`: A loading indicator.
+    `StarRating`: A component for rating movies.
+    `MovieDetails`: Displays detailed information about a movie.
+    `MoviesList`: Lists search results with basic information.
+    `NavBar`: The navigation bar at the top of the app.
+    `Search`: Component for searching movies.
+    `WatchedMoviesList`: Lists movies you've watched.
+    `WatchedMoviesSummary`: Displays a summary of your watched movies.
 
 License
 
