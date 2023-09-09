@@ -3,21 +3,11 @@ import { useKey } from "./custom effects/useKey";
 
 export default function Search({ query, setQuery }) {
   const inputEl = useRef(null);
-  useKey("Enter", setQuery);
-  useEffect(
-    function () {
-      if (document.activeElement === inputEl.current) return;
-      function callback(e) {
-        if (e.code === "Enter") {
-          inputEl.current.focus();
-          setQuery("");
-        }
-      }
-      document.addEventListener("keydown", callback);
-      return () => document.addEventListener("keydown", callback);
-    },
-    [setQuery]
-  );
+  useKey("Enter", function () {
+    if (document.activeElement === inputEl.current) return;
+    inputEl.current.focus();
+    setQuery("");
+  });
   return (
     <input
       className="search"
