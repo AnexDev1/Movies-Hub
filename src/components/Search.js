@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { useKey } from "./custom effects/useKey";
 
 export default function Search({ query, setQuery }) {
