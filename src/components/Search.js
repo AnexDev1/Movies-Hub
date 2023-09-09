@@ -1,8 +1,9 @@
 import { useEffect, useRef } from "react";
+import { useKey } from "./custom effects/useKey";
 
 export default function Search({ query, setQuery }) {
   const inputEl = useRef(null);
-
+  useKey("Enter", setQuery);
   useEffect(
     function () {
       if (document.activeElement === inputEl.current) return;

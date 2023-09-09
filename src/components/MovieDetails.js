@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Loader from "./Loader";
 import StarRating from "./StarRatings";
 import ErrorMessage from "./ErrorMessage";
+import { useKey } from "./custom effects/useKey";
 const KEY = "1f896906";
 
 export default function MovieDetails({
@@ -14,6 +15,7 @@ export default function MovieDetails({
   const [isLoading, setIsLoading] = useState(false);
   const [userRating, setUserRating] = useState("");
   const [error, setError] = useState("");
+  useKey("Escape", onCloseMovie);
   const {
     Actors: actors,
     Director: director,
@@ -43,23 +45,6 @@ export default function MovieDetails({
     onAddWatchedMovie(newMovie);
     onCloseMovie();
   }
-
-  useEffect(
-    function () {
-      function callback(e) {
-        if (e.code === "Escape") {
-          onCloseMovie();
-        }
-      }
-
-      document.addEventListener("keydown", callback);
-
-      return function () {
-        document.removeEventListener("keydown", callback);
-      };
-    },
-    [onCloseMovie]
-  );
 
   useEffect(
     function () {
